@@ -3,3 +3,6 @@ Générateur d'île, se base sur une superposition de matrices et leur somme et 
 
 
 Générateur de labyrinthe:
+![image](https://github.com/DanmakuGecko/Procedural-map/assets/72706524/bd14cd6e-5434-4e5f-801b-65ac32ecffee)
+
+Pas vraiment fonctionel mais c'est joli
