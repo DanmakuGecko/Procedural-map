@@ -1,0 +1,202 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+lim = 100
+matrice = np.zeros((lim,lim))
+
+def chemin_ouvert(x,y):
+    
+    
+    
+        
+    start = [x,y]
+    matrice[x,y] = 2
+        
+    traceur = start
+    
+    i=0
+    
+    directions = ["gauche","haut","droite","bas"]
+    P = [0.25,0.25,0.25,0.25] #Probabilté d'aller respecivement : a gauche, en haut, a droite, en bas
+    
+    
+    
+    while traceur[0] != lim-1 or traceur[1] != lim-1:
+        print(P)
+    
+        while P[0] + P[1] + P[2] + P[3] > 1:
+            k = np.random.randint(0,4)
+            if P[k] > 0.01:
+                P[k] -= 0.01
+        
+        print(P)
+            
+            
+        dirr = np.random.choice(directions, p=P)
+        
+        
+        
+        if dirr == "droite": # A droite
+            if traceur[1] == lim or traceur[1] == lim-1:
+                break
+            else:
+                for i in range(0,1):
+                    traceur[0] += 0
+                    traceur[1] += 1
+                    matrice[traceur[0],traceur[1]] = 2
+            
+                    P[2] += 0.05
+                        
+                    
+                    
+        if dirr == "gauche":
+            if traceur[1] == 0 or traceur[1] == 1:
+                break
+            else:
+                for i in range(0,1):
+                    traceur[0] += 0
+                    traceur[1] += -1
+                    matrice[traceur[0],traceur[1]] = 2      
+                    
+                    P[0] += 0.05
+                        
+                    
+                    
+                    
+        if dirr == "bas": #En bas
+            if traceur[0] == lim or traceur[0] == lim-1:
+                break
+            else:
+                for i in range(0,1):
+                    traceur[0] += 1
+                    traceur[1] += 0
+                    matrice[traceur[0],traceur[1]] = 2
+                
+                    P[3] += 0.05
+                        
+                    
+                    
+                    
+        if dirr == "haut": #En haut
+            if traceur[0] == 0 or traceur[0] == 1:
+                break
+            else:
+                for i in range(0,1):
+                    traceur[0] += -1
+                    traceur[1] += 0
+                    matrice[traceur[0],traceur[1]] = 2
+                 
+                    P[1] += 0.05
+                        
+    
+    
+    
+    return(matrice)
+
+
+def chemin_ferme(x,y):
+  
+    
+        
+    start = [x,y]
+    matrice[x,y] = 2
+        
+    traceur = start
+    
+    i=0
+    
+    directions = ["gauche","haut","droite","bas"]
+    P = [0.25,0.25,0.25,0.25] #Probabilté d'aller respecivement : a gauche, en haut, a droite, en bas
+    
+    
+    
+    while traceur[0] != lim-1 or traceur[1] != lim-1:
+        print(P)
+    
+        while P[0] + P[1] + P[2] + P[3] > 1:
+            k = np.random.randint(0,4)
+            if P[k] > 0.01:
+                P[k] -= 0.01
+        
+        print(P)
+            
+            
+        dirr = np.random.choice(directions, p=P)
+        
+        
+        
+        if dirr == "droite": # A droite
+            if traceur[1] == lim-10 or traceur[1] == lim-11:
+                break
+            else:
+                for i in range(0,2):
+                    traceur[0] += 0
+                    traceur[1] += 1
+                    matrice[traceur[0],traceur[1]] = 2
+            
+                    P[2] += 0.05
+                        
+                    
+                    
+        if dirr == "gauche":
+            if traceur[1] == 10 or traceur[1] == 11:
+                break
+            else:
+                for i in range(0,2):
+                    traceur[0] += 0
+                    traceur[1] += -1
+                    matrice[traceur[0],traceur[1]] = 2      
+                    
+                    P[0] += 0.05
+                        
+                    
+                    
+                    
+        if dirr == "bas": #En bas
+            if traceur[0] == lim-10 or traceur[0] == lim-11:
+                break
+            else:
+                for i in range(0,2):
+                    traceur[0] += 1
+                    traceur[1] += 0
+                    matrice[traceur[0],traceur[1]] = 2
+                
+                    P[3] += 0.05
+                        
+                    
+                    
+                    
+        if dirr == "haut": #En haut
+            if traceur[0] == 10 or traceur[0] ==11:
+                break
+            else:
+                for i in range(0,2):
+                    traceur[0] += -1
+                    traceur[1] += 0
+                    matrice[traceur[0],traceur[1]] = 2
+                 
+                    P[1] += 0.05
+                        
+    
+    
+    
+    return(matrice)
+
+xi = np.random.randint(10,lim-10)
+yi = np.random.randint(10,lim-10)
+matricef = chemin_ouvert(xi, yi) + chemin_ouvert(xi, yi)
+
+for i in range(0,30):
+    x = np.random.randint(10,lim-10)
+    y = np.random.randint(10,lim-10)
+    matricef += chemin_ferme(x, y)
+    
+    
+#A DECOMMENTER POUR RENDRE LE CHEMIN LISIBLE !----------------------------------------------
+#matricef = np.where(matricef >= 2, 1, 0)  
+
+plt.imshow(matricef, cmap='viridis')
+
+plt.show()
+
+print(matricef)
